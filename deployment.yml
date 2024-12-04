@@ -1,3 +1,4 @@
+# Frontend Deployment and Service
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -17,6 +18,21 @@ spec:
       - name: front-con
         image: yunchae02/front:1
 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: front-service
+spec:
+  selector:
+    app: front
+  ports:
+    - protocol: TCP
+      port: 80        
+      targetPort: 80   
+  type: LoadBalancer  
+
+# Backend Deployment and Service
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -35,3 +51,4 @@ spec:
       containers:
       - name: back-con
         image: yunchae02/back:1
+
